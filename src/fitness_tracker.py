@@ -158,6 +158,28 @@ def plot_progress(date):
     # Prevent cutting labels
     plt.tight_layout()
     plt.show()
+#Recovery System
+
+def get_avg_volume(exclude_date):
+
+    workout_df = pd.read_csv(workout_sets_file)
+
+    # We don't want current workout affecting historical average
+    workout_df = workout_df[workout_df["Date"] != exclude_date]
+
+    # create volume column for each set
+    workout_df["Volume"] = workout_df["Reps"] * workout_df["Weight"]
+
+    daily_volume = workout_df.groupby("Date")["Volume"].sum()
+    recent_sessions = daily_volume.tail(10)
+
+    # if insufficient history
+    if len(recent_sessions) < 10:
+        return None
+
+    avg_volume = recent_sessions.mean()
+    return avg_volume
+
 
 #FUNCTION CALLS
 
