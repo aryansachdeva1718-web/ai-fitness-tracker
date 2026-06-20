@@ -19,3 +19,10 @@
 - Streamlit Frontend
 - Machine Learning Prediction Model
 - AI Workout Recommendations
+
+## Next Possible Improvements
+
+- Calorie trend analysis vs previous days
+- Recovery notes input from user
+- PR detection system improvements
+- Exercise-wise advanced analytics

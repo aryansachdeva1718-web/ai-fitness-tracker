@@ -34,3 +34,11 @@ Python-based fitness analytics application.
 - Recovery Score System
 - Plateau Detection
 - Session Comparison
+
+## New Features Added
+
+- Recovery Score System (0-100)
+- Sleep Recovery Analysis
+- Calorie Recovery Analysis
+- Workout Fatigue Analysis using historical volume
+- Automatic Recovery Interpretation after workout session
