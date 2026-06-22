@@ -10,10 +10,15 @@ Python-based fitness analytics application.
 - Volume Calculation
 - Heaviest Lift Detection
 - Progress Visualization
+- Recovery Score System (0-100)
+- Sleep Recovery Analysis
+- Calorie Recovery Analysis
+- Workout Fatigue Analysis using historical volume
+- Automatic Recovery Interpretation after workout session
+- Calorie Trend Analysis
 
 ## In Development
 
-- Recovery Score System
 - Plateau Detection
 - Session Comparison
 
@@ -29,16 +34,7 @@ Python-based fitness analytics application.
 - Performance comparison
 - AI workout recommendations
 
-## In Development
-
-- Recovery Score System
-- Plateau Detection
-- Session Comparison
-
 ## New Features Added
 
-- Recovery Score System (0-100)
-- Sleep Recovery Analysis
-- Calorie Recovery Analysis
-- Workout Fatigue Analysis using historical volume
 - Automatic Recovery Interpretation after workout session
+- Calorie Trend Analysis

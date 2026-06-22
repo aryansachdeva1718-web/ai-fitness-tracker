@@ -244,6 +244,26 @@ def calorie_score(calories, bodyweight):
         score = 5
     return score
 
+#Calorie Trend
+def calorie_trend(date):
+    daily_df = pd.read_csv(daily_metrics_file)
+    today_data = daily_df[daily_df["Date"] == date]
+    calories = today_data["Calories"].iloc[0]
+
+    history_data = daily_df[daily_df["Date"] != date]
+    if len(history_data) < 3:
+        print("\nNot enough history for calorie trend analysis.")
+        return
+    recent_data = history_data.tail(3)
+    avg_calories = recent_data["Calories"].mean()
+
+    if calories > avg_calories * 1.20:
+        print("\nCalorie intake is significantly higher than your recent average.")
+    elif calories < avg_calories * 0.80:
+        print("\nCalorie intake is significantly lower than your recent average.")
+    else:
+        print("\nCalorie intake is consistent with your recent average.")
+    
 #Recovery Score
 def recovery_score(date):
     daily_df = pd.read_csv(daily_metrics_file)
@@ -326,6 +346,7 @@ def main():
             if score is not None:
                 print(f"\nRecovery Score: {score:.2f}/100")
                 interpret_score(score)
+                calorie_trend(date)
 
 
         elif choice == "3":

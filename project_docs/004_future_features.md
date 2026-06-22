@@ -2,7 +2,6 @@
 
 ## High Priority
 
-- Recovery Score System
 - Plateau Detection
 - Session Comparison
 - Percentage Improvement Analysis
@@ -22,7 +21,6 @@
 
 ## Next Possible Improvements
 
-- Calorie trend analysis vs previous days
 - Recovery notes input from user
 - PR detection system improvements
 - Exercise-wise advanced analytics

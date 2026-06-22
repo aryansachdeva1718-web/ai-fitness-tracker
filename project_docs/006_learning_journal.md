@@ -31,85 +31,26 @@ Will focus on building intelligent logic first.
 
 ### Key Learnings
 
-**1. Fixed thresholds are unreliable**
+**1. Personalized scoring > fixed thresholds**  
+Static fatigue thresholds don’t work. Using volume ratio (`today_volume / avg_volume`) makes scoring user-specific.
 
-Using static volume thresholds (like 7000+ = high fatigue) does not work because every user has different training capacity.
+**2. Historical data matters**  
+Chose last **10 workout sessions** — enough data without including outdated performance.
 
----
+**3. Edge cases shape design**  
+Excluded current date from average volume calculation to avoid skewed recovery scores.
 
-**2. Relative scoring is better**
+**4. Missing data should not be faked**  
+If workout history is insufficient, skip fatigue score and scale remaining score instead.
 
-Instead of fixed thresholds:
+**5. Scope discipline matters**  
+Dropped sleep quality tracking since accurate monitoring is unrealistic for current project scope.
 
-volume_ratio = today_volume / avg_volume
+### Biggest Takeaway
 
-This makes fatigue scoring personalized.
+Building projects is not just coding.
 
----
-
-**3. Historical data selection matters**
-
-Decided to use **last 10 workout sessions**.
-
-Reason:
-
-- 5 sessions too noisy  
-- 15 sessions may include outdated strength levels  
-
----
-
-**4. Edge cases affect architecture**
-
-Today’s workout should not affect historical average.
-
-Solution:
-
-Pass current date into `get_avg_volume()` and exclude it from calculation.
-
----
-
-**5. Never fake missing data**
-
-If user has fewer than 10 workout sessions:
-
-- Skip fatigue scoring  
-- Scale remaining score to 100  
-
-Better than inventing fake values.
-
----
-
-**6. Product scope should stay realistic**
-
-Considered tracking sleep quality.
-
-Rejected because project cannot realistically measure sleep cycles or interruptions.
-
-Sleep duration only.
-
----
-
-**7. Added future feedback system idea**
-
-User can optionally log recovery feedback.
-
-Example:
-
-- Felt weak  
-- Low energy  
-- Still sore  
-
-Can help compare prediction vs actual experience.
-
----
-
-## Biggest Takeaway
-
-Today reinforced that building projects is not just writing code.
-
-Good code solves problems.
-
-Good architecture handles real-world edge cases.
+Good architecture means handling real-world edge cases before they become bugs.
 
 # June 20
 
@@ -126,3 +67,25 @@ Key learning:
 - Learned how to combine multiple scoring systems into one analytics pipeline
 - Improved pandas filtering and validation handling using .empty and .iloc
 - Understood importance of handling missing data instead of forcing calculations
+
+# June 22
+
+## Focus: Calorie Trend Analysis
+
+### Key Learnings
+
+**1. Trends are better than isolated values**  
+Single day calorie intake means little without comparing recent eating patterns.
+
+**2. Recent data > entire history**  
+Used last 3 entries instead of full history to reflect current eating habits.
+
+**3. Relative comparison improves analysis**  
+Used percentage-based thresholds (±20%) instead of fixed calorie differences.
+
+**4. Handle insufficient history**  
+If fewer than 3 past entries exist, skip analysis instead of forcing output.
+
+### Biggest Takeaway
+
+Analytics become more meaningful when current data is compared against user history rather than viewed independently.
