@@ -1,9 +1,12 @@
+import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-daily_metrics_file = "daily_metrics.csv"
-workout_sets_file = "workout_sets.csv"
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+daily_metrics_file = os.path.join(BASE_DIR, "data", "daily_metrics.csv")
+workout_sets_file = os.path.join(BASE_DIR, "data", "workout_sets.csv")
 
 if not Path(daily_metrics_file).exists():
 
@@ -28,8 +31,11 @@ if not Path(workout_sets_file).exists():
 
     workout_df.to_csv(workout_sets_file, index=False)
 
+from datetime import date
+
 def get_date():
-    return input("\nEnter date (DD/MM/YYYY): ")
+    return str(date.today())
+
 def load_daily_data():
     return pd.read_csv(daily_metrics_file)
 def load_workout_data():
