@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from datetime import datetime, timedelta
 from helpers import *
 
 #----------DAILY METRICS FUNCTION----------
@@ -148,3 +149,37 @@ def calorie_trend(date):
         print("\nCalorie intake is significantly lower than your recent average.")
     else:
         print("\nCalorie intake is consistent with your recent average.")
+
+def consistency_tracker(date):
+
+    workout_df = load_workout_data()
+    unique_dates = workout_df["Date"].unique()
+    today = datetime.strptime(date, "%Y-%m-%d")
+    seven_days_ago = today - timedelta(days=6)
+
+    workout_days = 0
+    for workout_date in unique_dates:
+
+        workout_datetime = datetime.strptime(workout_date, "%Y-%m-%d")
+
+        if workout_datetime >= seven_days_ago:
+            workout_days += 1
+
+    print(f"\nYou trained {workout_days} times in the last 7 days.")
+
+    if workout_days == 7:
+        print("Consistency: Excellent 🔥")
+
+    elif workout_days >= 5:
+        print("Consistency: Very consistent 💪")
+
+    elif workout_days >= 3:
+        print("Consistency: Moderate 👍")
+
+    elif workout_days >= 1:
+        print("Consistency: Inconsistent ⚠️")
+
+    else:
+        print("No recent training logged.")
+
+        

@@ -25,10 +25,9 @@ def main():
                 print(f"\nRecovery Score: {score:.2f}/100")
                 interpret_score(score)
                 calorie_trend(date)
-
+                consistency_tracker(date)
 
         elif choice == "3":
             break
-
 
 main()
