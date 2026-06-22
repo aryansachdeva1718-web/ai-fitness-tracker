@@ -70,7 +70,7 @@ Key learning:
 
 # June 22
 
-## Focus: Calorie Trend Analysis
+## Focus: Calorie Trend Analysis & Code Refactoring
 
 ### Key Learnings
 
@@ -86,6 +86,17 @@ Used percentage-based thresholds (±20%) instead of fixed calorie differences.
 **4. Handle insufficient history**  
 If fewer than 3 past entries exist, skip analysis instead of forcing output.
 
+**5. Large files become hard to manage**  
+362 lines in a single file made future scaling difficult.
+
+**6. Code should be split by responsibility**  
+Separated project into tracker, recovery, helpers, and main modules.
+
+**7. Testing after every change is critical**  
+Verified imports and functionality after each file split.
+
 ### Biggest Takeaway
 
 Analytics become more meaningful when current data is compared against user history rather than viewed independently.
+
+Organizing code into maintainable architecture is also important.

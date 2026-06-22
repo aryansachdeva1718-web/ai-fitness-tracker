@@ -28,21 +28,26 @@ if not Path(workout_sets_file).exists():
 
     workout_df.to_csv(workout_sets_file, index=False)
 
-daily_df = pd.read_csv(daily_metrics_file)
-workout_df = pd.read_csv(workout_sets_file)
+def get_date():
+    return input("\nEnter date (DD/MM/YYYY): ")
+def load_daily_data():
+    return pd.read_csv(daily_metrics_file)
+def load_workout_data():
+    return pd.read_csv(workout_sets_file)
+daily_df = load_daily_data()
+workout_df = load_workout_data()
+
 
 #----------DAILY METRICS FUNCTION----------
 def log_daily_metrics():
 
-    daily_df= pd.read_csv(daily_metrics_file)
+    daily_df = load_daily_data()
     print("\n--- DAILY METRICS ---")
 
-    date = input("Enter date (YYYY-MM-DD): ")
+    date = get_date()
     sleep = float(input("Enter sleep hours: "))
     calories = int(input("Enter calories: "))
     bodyweight = float(input("Enter bodyweight: "))
-
-
 
     new_daily_entry = {
         "Date": date,
@@ -62,8 +67,8 @@ def log_daily_metrics():
 def log_workout():
     print("\n--- WORKOUT LOGGING ---")
 
-    workout_df = pd.read_csv(workout_sets_file)
-    date = input("Enter date (YYYY-MM-DD): ")
+    workout_df = load_workout_data()
+    date = get_date()
 
     while True:
         
@@ -114,7 +119,7 @@ def log_workout():
 
 #----------ANALYTICS & GRAPHS----------
 def workout_summary(date):
-    workout_df = pd.read_csv(workout_sets_file)
+    workout_df = load_workout_data()
     today_data = workout_df[workout_df["Date"] == date]
 
     total_sets = len(today_data)
@@ -137,7 +142,7 @@ def workout_summary(date):
     print("\nWorkout completed successfully.\n")
 
 def plot_progress(date):
-    workout_df = pd.read_csv(workout_sets_file)
+    workout_df = load_workout_data()
     today_data = workout_df[workout_df["Date"] == date]
 
     today_exercises = today_data["Exercise"].unique()
@@ -160,11 +165,31 @@ def plot_progress(date):
     plt.tight_layout()
     plt.show()
 
+#Calorie Trend
+def calorie_trend(date):
+    daily_df = load_daily_data()
+    today_data = daily_df[daily_df["Date"] == date]
+    calories = today_data["Calories"].iloc[0]
+
+    history_data = daily_df[daily_df["Date"] != date]
+    if len(history_data) < 3:
+        print("\nNot enough history for calorie trend analysis.")
+        return
+    recent_data = history_data.tail(3)
+    avg_calories = recent_data["Calories"].mean()
+
+    if calories > avg_calories * 1.20:
+        print("\nCalorie intake is significantly higher than your recent average.")
+    elif calories < avg_calories * 0.80:
+        print("\nCalorie intake is significantly lower than your recent average.")
+    else:
+        print("\nCalorie intake is consistent with your recent average.")
+
 #----------RECOVERY SYSTEM----------
 #Average volume over last 10 sessions
 def get_avg_volume(exclude_date):
 
-    workout_df = pd.read_csv(workout_sets_file)
+    workout_df = load_workout_data()
 
     # We don't want current workout affecting historical average
     workout_df = workout_df[workout_df["Date"] != exclude_date]
@@ -185,7 +210,7 @@ def get_avg_volume(exclude_date):
 #Today Volume
 def get_today_volume(date):
 
-    workout_df = pd.read_csv(workout_sets_file)
+    workout_df = load_workout_data()
 
     today_workout = workout_df[workout_df["Date"] == date]
     today_workout["Volume"] = (today_workout["Reps"] * today_workout["Weight"])
@@ -243,30 +268,10 @@ def calorie_score(calories, bodyweight):
     else:
         score = 5
     return score
-
-#Calorie Trend
-def calorie_trend(date):
-    daily_df = pd.read_csv(daily_metrics_file)
-    today_data = daily_df[daily_df["Date"] == date]
-    calories = today_data["Calories"].iloc[0]
-
-    history_data = daily_df[daily_df["Date"] != date]
-    if len(history_data) < 3:
-        print("\nNot enough history for calorie trend analysis.")
-        return
-    recent_data = history_data.tail(3)
-    avg_calories = recent_data["Calories"].mean()
-
-    if calories > avg_calories * 1.20:
-        print("\nCalorie intake is significantly higher than your recent average.")
-    elif calories < avg_calories * 0.80:
-        print("\nCalorie intake is significantly lower than your recent average.")
-    else:
-        print("\nCalorie intake is consistent with your recent average.")
-    
+ 
 #Recovery Score
 def recovery_score(date):
-    daily_df = pd.read_csv(daily_metrics_file)
+    daily_df = load_daily_data()
     today_data = daily_df[daily_df["Date"] == date]
 
     if today_data.empty:
@@ -320,15 +325,17 @@ def interpret_score(score):
         print("\nRecovery Status: Very Poor")
         print("Sleep, nutrition or fatigue may be limiting recovery today.")
     
-
+    
 #----------FUNCTION CALLS----------
 def main():
 
     while True:
+
         print("\n----- Fitness Tracker -----")
         print("1. Log Daily Metrics")
         print("2. Log Workout Session")
         print("3. Exit")
+
         choice = input("Enter choice: ")
 
         if choice == "1":
@@ -336,13 +343,9 @@ def main():
 
 
         elif choice == "2":
-            # log workout and get date
             date = log_workout()
-            # show workout analytics
-            workout_summary(date)
-            # calculate recovery score
             score = recovery_score(date)
-            # only proceed if daily metrics exist
+
             if score is not None:
                 print(f"\nRecovery Score: {score:.2f}/100")
                 interpret_score(score)
@@ -350,9 +353,6 @@ def main():
 
 
         elif choice == "3":
-            print("Exiting...")
             break
-        else:
-            print("Invalid choice. Try again.")
 
 main()

@@ -181,3 +181,127 @@ Tasks:
 - call scoring functions
 - calculate total score
 - print recommendations
+
+## Fatigue Scoring System Update
+
+Original Approach:
+
+Use fixed volume thresholds.
+
+Example:
+
+7000+ volume = high fatigue
+
+Issue:
+
+Volume tolerance differs between users.
+
+Advanced users can handle significantly higher workloads.
+
+Conclusion:
+
+Fixed thresholds are unreliable.
+
+---
+
+New Approach:
+
+Use relative fatigue scoring.
+
+Compare today's volume against user's historical average volume.
+
+Formula:
+
+volume_ratio = today_volume / avg_volume
+
+avg_volume = average volume from last 10 workout sessions
+
+---
+
+Scoring Logic
+
+ratio <= 1.0 → 20 points
+
+1.0 - 1.2 → 16 points
+
+1.2 - 1.4 → 12 points
+
+1.4 - 1.7 → 7 points
+
+>1.7 → 3 points
+
+## Historical Data Decision
+
+Question:
+
+How much workout history should be used?
+
+Considered:
+
+Last 5 sessions
+
+Last 10 sessions
+
+Last 15 sessions
+
+Decision:
+
+Use last 10 workout sessions.
+
+Reason:
+
+5 sessions too small and noisy.
+
+15 sessions may include outdated strength levels.
+
+10 sessions provides balance between recency and sample size.
+
+## Insufficient Historical Data
+
+Problem:
+
+User may have fewer than 10 logged workout sessions.
+
+Possible Approaches:
+
+1. Default fatigue score
+
+2. Skip fatigue analysis
+
+Decision:
+
+Skip fatigue analysis.
+
+Reason:
+
+Avoid inventing artificial data.
+
+Scale remaining score to 100 instead.
+
+Example:
+
+64/80 → scaled to 80/100
+
+## Current Date Exclusion Logic
+
+Problem:
+
+Today's workout should not be included while calculating historical average volume.
+
+Reason:
+
+This creates biased fatigue comparison.
+
+Incorrect Approach:
+
+Call get_avg_volume() before workout logging.
+
+Issue:
+
+Fails if user opens app later after workout is already saved.
+
+Final Approach:
+
+Pass current date into get_avg_volume(date).
+
+Remove rows matching current date before calculating historical average.

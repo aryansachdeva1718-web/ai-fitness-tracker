@@ -38,3 +38,15 @@ Python-based fitness analytics application.
 
 - Automatic Recovery Interpretation after workout session
 - Calorie Trend Analysis
+
+## Project Structure
+
+main.py → Application entry point  
+
+tracker.py → Workout logging + analytics  
+
+recovery.py → Recovery scoring subsystem  
+
+helpers.py → Utility/helper functions  
+
+data/ → CSV storage files
