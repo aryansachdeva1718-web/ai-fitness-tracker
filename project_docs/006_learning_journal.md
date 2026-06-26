@@ -100,3 +100,31 @@ Verified imports and functionality after each file split.
 Analytics become more meaningful when current data is compared against user history rather than viewed independently.
 
 Organizing code into maintainable architecture is also important.
+
+# June 26
+
+## Focus: Workout Recommendation Engine Architecture
+
+### Key Learnings
+
+**1. Exercise-level data is important**
+
+Built an exercise database mapping each exercise to primary and secondary muscles.
+
+---
+
+**2. Recommendation logic needs muscle tracking**
+
+The system must know which muscles were trained before suggesting the next workout.
+
+---
+
+**3. Compound vs isolation exercises differ**
+
+Compound lifts affect multiple muscles, while isolation movements may have little or no secondary involvement.
+
+---
+
+## Biggest Takeaway
+
+Smart systems are built on well-structured logic before adding machine learning.

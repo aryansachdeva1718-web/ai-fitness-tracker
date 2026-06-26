@@ -19,6 +19,7 @@ A Python-based fitness tracking application that logs workouts, analyzes perform
 - Fatigue scoring based on relative training volume
 - Calorie trend analysis using historical intake data
 - Modular Python architecture for maintainability
+- Exercise database with primary and secondary muscle mapping
 
 ## Project Structure
 
