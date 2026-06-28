@@ -37,8 +37,6 @@ def days_since_last_trained():
 
     return days_since
 
-print(days_since_last_trained())
-
 
 
                 

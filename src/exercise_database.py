@@ -26,8 +26,8 @@ exercise_database = {
     },
 
     "Deadlift": {
-        "primary": ["Hamstrings", "Back"],
-        "secondary": ["Glutes", "Forearms"]
+        "primary": ["Glutes", "Back"],
+        "secondary": ["Hamstrings", "Forearms"]
     },
 
     "Barbell Curl": {
@@ -57,6 +57,56 @@ exercise_database = {
 
     "Seated Leg Curl": {
         "primary": ["Hamstrings"],
+        "secondary": []
+    },
+
+    "Chest Fly": {
+        "primary": ["Chest"],
+        "secondary":["Shoulders"]
+    },
+
+    "Leg Press": {
+        "primary": ["Quads"],
+        "secondary": ["Glutes"]
+    },
+
+    "Lat Pulldown": {
+        "primary": ["Back"],
+        "secondary": ["Biceps"]
+    },
+
+    "Shoulder Press": {
+        "primary": ["Shoulders"],
+        "secondary": ["Triceps"]
+    },
+
+    "Dips": {
+        "primary": ["Chest", "Triceps"],
+        "secondary": ["Shoulders"]
+    },
+
+    "Cable Row": {
+        "primary": ["Back"],
+        "secondary": ["Biceps", "Rear Delts"]
+    },
+
+    "Hack Squat": {
+        "primary": ["Quads"],
+        "secondary": ["Glutes"]
+    },
+
+    "Romanian Deadlift": {
+        "primary": ["Hamstrings", "Glutes"],
+        "secondary": ["Back", "Forearms"]
+    },
+
+    "Overhead Tricep Extension": {
+        "primary": ["Triceps"],
+        "secondary": []
+    },
+
+    "Calf Raise": {
+        "primary": ["Calves"],
         "secondary": []
     },
 
