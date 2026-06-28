@@ -12,4 +12,5 @@ def recommend_next_workout():
         #DO NOT compare keys, compare values using .get()
         best_muscle = max(priority_scores, key=priority_scores.get)
 
-    return priority_scores
+    sorted_scores = dict(sorted(priority_scores.items(), key=lambda x: x[1], reverse=True))
+    return sorted_scores

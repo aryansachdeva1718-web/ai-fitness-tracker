@@ -37,6 +37,8 @@ def days_since_last_trained():
 
     return days_since
 
+print(get_last_trained_muscles())
+
 
 
                 
