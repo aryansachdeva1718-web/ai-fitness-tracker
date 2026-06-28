@@ -128,3 +128,31 @@ Compound lifts affect multiple muscles, while isolation movements may have littl
 ## Biggest Takeaway
 
 Smart systems are built on well-structured logic before adding machine learning.
+
+# June 28
+
+## Focus: Muscle Recovery Tracking Logic
+
+### Key Learnings
+
+**1. Historical workout data can be used to track muscle recovery**
+
+Built logic to identify the latest training date for each muscle based on exercise history.
+
+---
+
+**2. Exercise-to-muscle mapping enables deeper analytics**
+
+Used primary and secondary muscle mappings to understand which muscles were involved in past workouts.
+
+---
+
+**3. Datetime handling is essential for analytics**
+
+Calculated days since each muscle was last trained using Python datetime functions.
+
+---
+
+## Biggest Takeaway
+
+Good recommendation systems depend on structured tracking logic before introducing AI/ML.
