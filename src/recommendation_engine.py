@@ -1,16 +1,62 @@
 from muscle_history import days_since_last_trained
 
-def recommend_next_workout():
-    muscle_days = days_since_last_trained()
-    priority_scores = {}
-    
-    #.items() = give me both key + value
+def filter_recently_trained(muscle_days):
+
+    filtered_muscles = {}
+
     for muscle, days in muscle_days.items():
+        if days > 1:
+            filtered_muscles[muscle] = days
+    return filtered_muscles
+
+def check_overdue_muscles(filtered_muscles):
+
+    overdue_muscles = {}
+
+    for muscle, days in filtered_muscles.items():
+
+        if days >= 7:
+            overdue_muscles[muscle] = days
+
+    if overdue_muscles:
+        highest_days = max(overdue_muscles.values())
+        highest_overdue = []
+        for muscle, days in overdue_muscles.items():
+            if days == highest_days:
+                highest_overdue.append(muscle)
+
+        return highest_overdue
+    
+    return None
+
+def calculate_priority_scores(filtered_muscles):
+
+    priority_scores = {}
+
+    for muscle, days in filtered_muscles.items():
         score = days * 2
         priority_scores[muscle] = score
 
-        #DO NOT compare keys, compare values using .get()
-        best_muscle = max(priority_scores, key=priority_scores.get)
+    return priority_scores
 
-    sorted_scores = dict(sorted(priority_scores.items(), key=lambda x: x[1], reverse=True))
+def sort_priority_scores(priority_scores):
+
+    sorted_scores = dict(sorted(priority_scores.items(), key=lambda x: x[1], reverse=True) )
     return sorted_scores
+
+def recommend_next_workout():
+
+    muscle_days = days_since_last_trained()
+    filtered_muscles = filter_recently_trained(muscle_days)
+    overdue = check_overdue_muscles(filtered_muscles)
+
+    if overdue:
+        return {
+    "training_focus": "neglected_muscle",
+    "muscles": overdue}
+
+    priority_scores = calculate_priority_scores(filtered_muscles)
+    sorted_scores = sort_priority_scores(priority_scores)
+    return {
+    "training_focus": "balanced_recommendation",
+    "recommendations": sorted_scores}
