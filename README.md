@@ -23,20 +23,21 @@ A Python-based fitness tracking application that logs workouts, analyzes perform
 
 ## Project Structure
 
+```text
 fitness-tracker/
-
-│── data/                # CSV storage files  
-│── project_docs/        # Learning journal and development logs  
-│── screenshots/         # README screenshots  
-│── src/  
-│   │── main.py                  # Main application entry point  
-│   │── tracker.py               # Workout logging + analytics  
-│   │── recovery.py              # Recovery scoring subsystem  
-│   │── helpers.py               # Utility/helper functions  
-│   │── muscle_history.py        # Maps primary and secondary muscles
-│   │── recommendation_engine.py # Workout recommendation 
-│── requirements.txt  
-│── README.md
+├── data/                       # CSV storage files
+├── project_docs/              # Learning journal + development logs
+├── screenshots/               # README screenshots
+├── src/
+│   ├── main.py               # Main application entry point
+│   ├── tracker.py            # Workout logging + analytics
+│   ├── recovery.py           # Recovery scoring subsystem
+│   ├── helpers.py            # Utility/helper functions
+│   ├── muscle_history.py     # Muscle training history tracking
+│   └── recommendation_engine.py  # Workout recommendation engine
+├── requirements.txt
+└── README.md
+````
 
 ## Tech Stack
 
