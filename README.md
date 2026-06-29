@@ -34,7 +34,7 @@ fitness-tracker/
 │   │── recovery.py              # Recovery scoring subsystem  
 │   │── helpers.py               # Utility/helper functions  
 │   │── muscle_history.py        # Maps primary and secondary muscles
-│   │── recommendation_engine.py # Muscle recommendation for next workout
+│   │── recommendation_engine.py    # Muscle recommendation for next workout
 │  
 │── requirements.txt  
 │── README.md
