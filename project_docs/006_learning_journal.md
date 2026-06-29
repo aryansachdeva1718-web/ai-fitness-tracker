@@ -156,3 +156,13 @@ Calculated days since each muscle was last trained using Python datetime functio
 ## Biggest Takeaway
 
 Good recommendation systems depend on structured tracking logic before introducing AI/ML.
+
+# June 29
+
+Refactored workout history system to separately track primary and secondary muscle involvement for each exercise.
+
+Built recovery tracking logic to calculate days since each muscle was trained directly or indirectly.
+
+Updated recommendation engine to filter recently trained muscles, detect overdue muscles, and generate recovery-aware workout recommendations using priority scoring with secondary muscle fatigue penalties.
+
+Completed Phase 1 backend logic for AI Fitness Tracker.

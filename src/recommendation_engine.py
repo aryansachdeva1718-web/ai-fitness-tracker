@@ -3,20 +3,21 @@ from muscle_history import days_since_last_trained
 def filter_recently_trained(muscle_days):
 
     filtered_muscles = {}
+    for muscle, info in muscle_days.items():
+        if info["primary_days"] is not None and info["primary_days"] <= 1:
+            continue     
 
-    for muscle, days in muscle_days.items():
-        if days > 1:
-            filtered_muscles[muscle] = days
+        filtered_muscles[muscle] = info
     return filtered_muscles
 
 def check_overdue_muscles(filtered_muscles):
 
     overdue_muscles = {}
 
-    for muscle, days in filtered_muscles.items():
+    for muscle, info in filtered_muscles.items():
 
-        if days >= 7:
-            overdue_muscles[muscle] = days
+        if info["primary_days"] >= 7:
+            overdue_muscles[muscle] = info["primary_days"]
 
     if overdue_muscles:
         highest_days = max(overdue_muscles.values())
@@ -33,8 +34,13 @@ def calculate_priority_scores(filtered_muscles):
 
     priority_scores = {}
 
-    for muscle, days in filtered_muscles.items():
-        score = days * 2
+    for muscle, info in filtered_muscles.items():
+        if info["primary_days"] is None: 
+            continue
+        
+        score = info["primary_days"] * 2
+        if info["secondary_days"] is not None and info["secondary_days"] <= 1:
+            score = score -2           
         priority_scores[muscle] = score
 
     return priority_scores

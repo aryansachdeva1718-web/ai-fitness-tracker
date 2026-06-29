@@ -14,13 +14,19 @@ def get_last_trained_muscles():
         if exercise in exercise_database:
             primary = exercise_database[exercise]["primary"]
             secondary = exercise_database[exercise]["secondary"]
-            all_muscles = primary + secondary
-
-            for muscle in all_muscles:
+            
+            for muscle in primary:
                 if muscle not in muscle_history:
-                    muscle_history[muscle] = date
-                elif date > muscle_history[muscle]:
-                    muscle_history[muscle] = date
+                    muscle_history[muscle] = {"last_primary": None,"last_secondary": None}
+                if muscle_history[muscle]["last_primary"] is None or date > muscle_history[muscle]["last_primary"]:
+                    muscle_history[muscle]["last_primary"] = date
+
+
+            for muscle in secondary:
+                if muscle not in muscle_history:
+                    muscle_history[muscle] = {"last_primary": None,"last_secondary": None}
+                if muscle_history[muscle]["last_secondary"] is None or date > muscle_history[muscle]["last_secondary"]:
+                    muscle_history[muscle]["last_secondary"] = date
                 
     return muscle_history
 
@@ -30,16 +36,23 @@ def days_since_last_trained():
 
     today = datetime.today()
 
-    for muscle, date in muscle_history.items():
-        past_date = datetime.strptime(date, "%Y-%m-%d")
-        difference = (today - past_date).days
-        days_since[muscle] = difference
+    for muscle, info in muscle_history.items():
+        primary_days = None
+        secondary_days = None
+
+        if info["last_primary"] is not None:
+            primary_days = datetime.strptime(info["last_primary"],"%Y-%m-%d")
+            primary_difference = (today - primary_days).days
+            primary_days = primary_difference
+            
+        if info["last_secondary"] is not None:
+            secondary_days = datetime.strptime(info["last_secondary"],"%Y-%m-%d")
+            secondary_difference = (today - secondary_days).days
+            secondary_days = secondary_difference
+
+        days_since[muscle] = {"primary_days": primary_days,"secondary_days": secondary_days}
 
     return days_since
-
-print(get_last_trained_muscles())
-
-
 
                 
 

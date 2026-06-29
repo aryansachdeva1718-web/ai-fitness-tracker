@@ -29,10 +29,12 @@ fitness-tracker/
 │── project_docs/        # Learning journal and development logs  
 │── screenshots/         # README screenshots  
 │── src/  
-│   │── main.py          # Main application entry point  
-│   │── tracker.py       # Workout logging + analytics  
-│   │── recovery.py      # Recovery scoring subsystem  
-│   │── helpers.py       # Utility/helper functions  
+│   │── main.py                  # Main application entry point  
+│   │── tracker.py               # Workout logging + analytics  
+│   │── recovery.py              # Recovery scoring subsystem  
+│   │── helpers.py               # Utility/helper functions  
+│   │── muscle_history.py        # Maps primary and secondary muscles
+│   │── recommendation_engine.py # Muscle recommendation for next workout
 │  
 │── requirements.txt  
 │── README.md
