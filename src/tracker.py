@@ -37,7 +37,7 @@ def log_workout():
 
     while True:
         
-        exercise = input("\nEnter exercise name: ").strip().title()
+        exercise = select_exercise()
         set_number = int(input("Enter total sets: "))
         
         for i in range(set_number):
@@ -58,7 +58,7 @@ def log_workout():
             new_workout_entry = {
                 "Date": date,
                 "Exercise": exercise,
-                "Set": set_number,
+                "Set": i + 1,
                 "Reps": reps,
                 "Weight": weight
             }

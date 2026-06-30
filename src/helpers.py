@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+from exercise_database import exercise_database
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -42,3 +43,17 @@ def load_workout_data():
     return pd.read_csv(workout_sets_file)
 daily_df = load_daily_data()
 workout_df = load_workout_data()
+
+def select_exercise():
+
+    exercises = list(exercise_database.keys())
+
+    print("\nSelect Exercise:")
+
+    for i, exercise in enumerate(exercises, start=1):
+
+        print(f"{i}. {exercise}")
+
+    choice = int(input("Enter choice: "))
+
+    return exercises[choice - 1]

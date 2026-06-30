@@ -16,7 +16,7 @@ def check_overdue_muscles(filtered_muscles):
 
     for muscle, info in filtered_muscles.items():
 
-        if info["primary_days"] >= 7:
+        if info["primary_days"] is not None and info["primary_days"] >= 7:
             overdue_muscles[muscle] = info["primary_days"]
 
     if overdue_muscles:
